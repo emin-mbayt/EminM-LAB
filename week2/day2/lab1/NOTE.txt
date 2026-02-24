@@ -1,0 +1,1 @@
+first i created vm and faced with connection refused error.i thought there some problem on vm soo I re-created it.Now everything works perfectly fine.I followed all steps 
