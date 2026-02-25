@@ -1,0 +1,22 @@
+ps aux | grep bash
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+emin         181  0.0  0.0   7984  4736 pts/0    Ss   08:42   0:00 -bash
+emin         204  0.0  0.0   7348  4096 pts/1    Ss+  08:42   0:00 -bash
+emin        1530  0.0  0.0   6524  2304 pts/0    S+   12:09   0:00 grep bash
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+for a reference lets choose first one:
+emin - user that runs process
+182  - Process ID(PID)
+0.0  - CPU Usage
+0.0  - Memory Usage with percentage %
+7984 - Virtual memory that process uses.with KiloBytes
+4736 - Physical Memory usage with KB
+pts/0 - which terminal using
+Ss    - Status of the Process
+08:42 - when process started
+0:00  - cpu time that process used 
+-bash - shows which command runs
