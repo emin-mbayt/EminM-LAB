@@ -1,0 +1,4 @@
+[2026-02-27_21:49:37] common.sh initialized from rubex
+[2026-02-27_21:53:09] Matched files: 0 (dir=/home/rubex/lab7/demo pattern=*.log older_than=0)
+[2026-02-27_21:59:07] Matched files: 5 (dir=/home/rubex/lab7/demo pattern=*.log older_than=0)
+[2026-02-27_21:59:07] Created archive: /home/rubex/lab7-outputs/archive-20260227-215907.tgz

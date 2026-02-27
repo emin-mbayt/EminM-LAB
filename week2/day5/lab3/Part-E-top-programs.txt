@@ -1,0 +1,20 @@
+   1322 
+    620 0000
+    196 Deactivated
+    179 registered
+    178 uid=1000
+    139 -
+    125 target
+    111 on
+     96 Reserving
+     95 unregistered
+     95 CTRL-EVENT-SIGNAL-CHANGE
+     75 00
+     72 Activating
+     71 Pulled
+     70 Successfully
+     68 Unhandled
+     66 SSDT
+     55 made
+     54 pull
+     54 hci0

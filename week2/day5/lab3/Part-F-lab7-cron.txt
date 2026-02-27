@@ -1,0 +1,2 @@
+30 2 * * * /home/rubex/lab7/scripts/backup.sh --source /home/rubex/lab7 --dest /home/rubex/lab7-outputs --name lab7 --retention 7 >> /home/rubex/lab7-outputs/backup.log 2>&1
+0 * * * * /home/rubex/lab7/scripts/log_parse.sh --file /var/log/syslog --type syslog --out /home/rubex/lab7-outputs >> /home/rubex/lab7-outputs/logparse.log 2>&1
