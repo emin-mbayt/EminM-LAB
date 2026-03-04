@@ -1,0 +1,1 @@
+i can acces all vms i have with third ip that I created for application gateway
