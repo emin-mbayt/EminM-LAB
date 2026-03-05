@@ -1,0 +1,1 @@
+LB works perfectly fine.i disabled all public ips attached to vms.two of them accessible through the one public IP
