@@ -1,0 +1,9 @@
+az vm create \
+  --resource-group $RESOURCE_GROUP \
+  --name $VM_NAME \
+  --image Ubuntu2204 \
+  --size  Standard_L8as_v3\
+  --admin-username $ADMIN_USERNAME \
+  --authentication-type ssh \
+  --generate-ssh-keys
+  --debug
