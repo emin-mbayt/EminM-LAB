@@ -1,0 +1,4 @@
+there was a name mismatch
+
+changed this line-> COPY --from=builder /app/target/ecommerce-app-1.1-SNAPSHOT.jar app.jar
+to this ->  COPY --from=builder /app/target/*.jar app.jar
