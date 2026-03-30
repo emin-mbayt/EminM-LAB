@@ -1,0 +1,1 @@
+there was a CORS error.i tried to solve this but im not a backend developer(2 hours)
