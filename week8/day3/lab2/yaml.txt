@@ -1,0 +1,81 @@
+name: Build, Test, and Deploy to Azure Web App (Container)
+
+on:
+ workflow_dispatch:
+
+permissions:
+ contents: read
+ actions: read
+ checks: write
+ pull-requests: write
+ #id-token: write
+
+env:
+ APP_PORT: 3000
+ IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/frontendapp-node
+ AZURE_RESOURCE_GROUP: EMIN_RG
+ AZURE_WEBAPP_NAME: emins-app
+
+jobs:
+ build-test-and-deploy:
+   runs-on: ubuntu-latest
+   environment: dev
+
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v4
+
+     - name: Setup Node.js
+       uses: actions/setup-node@v4
+       with:
+         node-version: 22.x
+         cache: npm
+         cache-dependency-path: package-lock.json
+
+     - name: Install dependencies
+       run: npm ci
+
+     - name: Run unit tests (if present)
+       run: npm test --if-present
+
+     - name: Build (optional)
+       run: npm run build 2>/dev/null || echo "No build step; continuing."
+
+     - name: Azure Login (Service Principal)
+       # If you adopt OIDC later, drop client-secret and configure federated creds
+       uses: azure/login@v2
+       with:
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
+         
+     - name: Login to Docker Hub
+       uses: docker/login-action@v3
+       with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+     - name: Build and push Docker image to Docker Hub
+       uses: docker/build-push-action@v6
+       with:
+         context: .
+         file: ./Dockerfile
+         push: true
+         tags: |
+           ${{ env.IMAGE_NAME }}:${{ github.sha }}
+           ${{ env.IMAGE_NAME }}:latest
+
+     - name: Configure Web App to use the new image
+       run: |
+         az webapp config appsettings set \
+           -g "${{ env.AZURE_RESOURCE_GROUP }}" \
+           -n "${{ env.AZURE_WEBAPP_NAME }}" \
+           --settings WEBSITES_PORT=${{ env.APP_PORT }} \
+                      DOCKER_REGISTRY_SERVER_URL=https://index.docker.io/v1/
+
+         az webapp config container set \
+           -g "${{ env.AZURE_RESOURCE_GROUP }}" \
+           -n "${{ env.AZURE_WEBAPP_NAME }}" \
+           --container-image-name "${{ env.IMAGE_NAME }}:${{ github.sha }}" \
+           --container-registry-url "https://index.docker.io"
+
+         # Restart to pull the new image immediately
+         az webapp restart -g "${{ env.AZURE_RESOURCE_GROUP }}" -n "${{ env.AZURE_WEBAPP_NAME }}"
