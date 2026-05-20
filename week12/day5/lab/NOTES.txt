@@ -1,0 +1,3 @@
+firs time i created backend deployment with invalid images(didn't change dockerhub_username haha).deleted and recreated it.everything works perfectly fine.
+
+i used web vs code for executing commands
