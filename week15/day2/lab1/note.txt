@@ -1,0 +1,2 @@
+i run 2 docker compose.first is application(api,db,ui),second is grafan,prometheus,cadvisor..
+
